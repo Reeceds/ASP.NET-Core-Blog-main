@@ -1,0 +1,48 @@
+﻿@model PostViewModel
+@{
+    ViewData["Title"] = "Create/Edit";
+}
+<link rel="stylesheet" href="~/lib/Trumbowyg-master/dist/ui/trumbowyg.min.css" />
+
+<div class="container">
+    <div class="row">
+        <form class="col-xl-6 col-lg-7" asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input asp-for="Id" type="hidden" />
+            <div class="form-group">
+                <label>Title</label>
+                <input class="form-control" asp-for="Title">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input class="form-control" asp-for="Description">
+            </div>
+            <div class="form-group">
+                <label>Tags</label>
+                <textarea class="form-control" rows="3" asp-for="Tags"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control mb-3" asp-for="Category">
+                    <option value="Travel">Travel</option>
+                    <option value="Programing">Programing</option>
+                    <option value="Photography">Photography</option>
+                </select>
+                <div class="mb-3">
+                    <label>Body</label>
+                    <textarea id="editor" asp-for="Body"></textarea>
+                </div>
+                <div class="form-group mb-4">
+                    <label>Image</label>
+                    <input asp-for="CurrentImage" type="hidden" />
+                    <input class="form-control-file" asp-for="Image">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/lib/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+    <script>$('#editor').trumbowyg();</script>
+}

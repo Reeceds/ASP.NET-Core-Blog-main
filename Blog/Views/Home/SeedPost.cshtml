@@ -1,0 +1,26 @@
+﻿@model SeedPostModel
+
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["Description"] = Model.Description;
+    ViewData["Keywords"] = $"{Model.Tags?.Replace(",", " ")} {Model.Category}";
+}
+
+<div class="container">
+    <div class="view-post-container">
+
+        @if (!String.IsNullOrEmpty(Model.Image))
+        {
+            var image_path = $"/Image/{Model.Image}";
+
+            <div class="view-post-image-container mb-4">
+                <img src="@image_path" style="width: 100%; height: auto;" />
+            </div>
+        }
+
+        <h2 class="post-title">@Model.Title</h2>
+        <p class="card-text view-post-separator"><small class="text-muted">@Model.Created</small></p>
+        <p>@Html.Raw(@Model.Body)</p>
+
+    </div>
+</div>

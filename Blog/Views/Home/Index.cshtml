@@ -1,0 +1,69 @@
+﻿@model SeedPostViewModel
+
+@{
+    ViewData["Title"] = "Blog Website";
+    ViewData["Description"] = "This blog has everything";
+    ViewData["Keywords"] = "blog programing travel photography";
+}
+
+<div class="container-fluid header-image mb-5 d-flex align-items-center">
+    <div class="container">
+        <h2 class="header-title pt-4">The Big Blog</h2>
+    </div>
+</div>
+
+
+<div class="container d-flex flex-column">
+
+    @foreach (var post in Model.SeedPosts)
+    {
+        var image_path = $"/Image/{post.Image}";
+
+        <a class="mb-5" asp-controller="Home" asp-action="SeedPost" asp-route-id="@post.Id">
+
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="@image_path" alt="..." style="width: 100%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body post-list">
+                            <h5 class="card-title post-title text-truncate">@post.Title</h5>
+                            <p class="card-text date"><small class="text-muted">@post.Created</small></p>
+                            <div class="ellipsis">
+                                <p class="card-text">@Html.Raw(string.Format(@post.Body))</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+
+
+
+    @foreach (var post in Model.Posts)
+    {
+        var image_path = $"/Image/{post.Image}";
+
+        <a class="mb-5" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="@image_path" alt="..." style="width: 100%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body post-list">
+                            <h5 class="card-title post-title text-truncate">@post.Title</h5>
+                            <p class="card-text date"><small class="text-muted">@post.Created</small></p>
+                            <div class="ellipsis">
+                                <p class="card-text post-list-description">@Html.Raw(string.Format(@post.Body))</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

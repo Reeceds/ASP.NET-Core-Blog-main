@@ -1,0 +1,44 @@
+﻿@model SeedPostViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h2 class="mb-4">Admin</h2>
+
+    <a asp-action="Edit" asp-controller="Panel" class="btn btn-success btn-lg mb-4" role="button" aria-disabled="true">Create Post +</a>
+
+
+    <div class="d-flex flex-row flex-wrap">
+
+        @foreach (var post in Model.SeedPosts)
+        {
+            var image_path = $"/Image/{post.Image}";
+
+            <div class="card mr-4 mb-4" style="width: 18rem;">
+                <img src="@image_path" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-truncate mb-3">@post.Title</h5>
+                    <a class="btn btn-primary mr-3 admin-post-btn disabled" asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id" role="button" aria-disabled="true">Edit</a>
+                    <a class="btn btn-danger admin-post-btn disabled" asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id" role="button" aria-disabled="true">Delete</a>
+                </div>
+            </div>
+        }
+
+
+        @foreach (var post in Model.Posts)
+        {
+            var image_path = $"/Image/{post.Image}";
+
+            <div class="card mr-4 mb-4" style="width: 18rem;">
+                <img src="@image_path" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title text-truncate mb-3">@post.Title</h5>
+                    <a class="btn btn-primary mr-3 admin-post-btn" asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">Edit</a>
+                    <a class="btn btn-danger admin-post-btn" asp-controller="Panel" asp-action="Remove" asp-route-id="@post.Id">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
